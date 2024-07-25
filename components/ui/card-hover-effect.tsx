@@ -1,7 +1,9 @@
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { IconType } from "react-icons";
+
+// Define the type for the icon component
+type IconType = React.ElementType;
 
 export const HoverEffect = ({
   items,
@@ -19,7 +21,7 @@ export const HoverEffect = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  py-10",
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10",
         className
       )}
     >
@@ -33,7 +35,7 @@ export const HoverEffect = ({
           <AnimatePresence>
             {hoveredIndex === idx && (
               <motion.span
-                className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-600/[0.8] block  rounded-3xl"
+                className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-600/[0.8] block rounded-3xl"
                 layoutId="hoverBackground"
                 initial={{ opacity: 0 }}
                 animate={{
@@ -47,8 +49,7 @@ export const HoverEffect = ({
               />
             )}
           </AnimatePresence>
-          <Card>
-            <CardIcon icon={item.icon} />
+          <Card icon={item.icon}>
             <CardTitle>{item.title}</CardTitle>
             <CardDescription>{item.description}</CardDescription>
           </Card>
@@ -61,9 +62,11 @@ export const HoverEffect = ({
 export const Card = ({
   className,
   children,
+  icon: Icon, // Accept the icon prop
 }: {
   className?: string;
   children: React.ReactNode;
+  icon?: IconType; // Define icon type
 }) => {
   return (
     <div
@@ -73,6 +76,11 @@ export const Card = ({
       )}
     >
       <div className="relative z-50">
+        {Icon && (
+          <div className="flex justify-center items-center mb-4">
+            <Icon className="text-4xl text-gray-500 dark:text-gray-400" /> {/* Render the icon */}
+          </div>
+        )}
         <div className="p-4">{children}</div>
       </div>
     </div>
@@ -87,7 +95,7 @@ export const CardTitle = ({
   children: React.ReactNode;
 }) => {
   return (
-    <h4 className={cn("flex items-center justify-center flex-col text-black font-bold tracking-wide mt-4", className)}>
+    <h4 className={cn("text-black font-bold tracking-wide mt-4", className)}>
       {children}
     </h4>
   );
@@ -109,19 +117,5 @@ export const CardDescription = ({
     >
       {children}
     </p>
-  );
-};
-
-export const CardIcon = ({
-  icon: Icon,
-  className,
-}: {
-  icon?: IconType;
-  className?: string;
-}) => {
-  return (
-    <div className={cn("flex items-center justify-center p-4", className)}>
-      {Icon && <Icon className="text-4xl text-gray-700 dark:text-gray-300" />}
-    </div>
   );
 };
