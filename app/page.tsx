@@ -1,4 +1,8 @@
+"use client";
+import React from "react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import {
   BrainCogIcon,
   EyeIcon,
@@ -6,43 +10,46 @@ import {
   MonitorSmartphoneIcon,
   ServerCogIcon,
   ZapIcon,
-} from "lucide-react"
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { LampContainer } from "@/components/ui/lamp";
+import { HoverEffect } from "@/components/ui/card-hover-effect";
 
 const features = [
   {
     name: "Store your PDF Documents",
-    description: "Store your PDF documents in the cloud and access them from anywhere.",
-    icon: GlobeIcon
+    description:
+      "Store your PDF documents in the cloud and access them from anywhere.",
+    icon: GlobeIcon,
   },
   {
     name: "Blazing fast responses",
     description: "Experience ligntning fast answers to your questions.",
-    icon: ZapIcon
+    icon: ZapIcon,
   },
   {
     name: "Chat Memorisation",
-    description: "Our intelligent Chatbot remebers previous conversations, providing a seamless experience.",
-    icon: BrainCogIcon
+    description:
+      "Our intelligent Chatbot remebers previous conversations, providing a seamless experience.",
+    icon: BrainCogIcon,
   },
   {
     name: "Interactive PDF Viewer",
     description: "View your PDF documents in an interactive viewer.",
-    icon: EyeIcon
+    icon: EyeIcon,
   },
   {
     name: "Cloud Backup",
     description: "Your PDF documents are backed up in the cloud.",
-    icon: ServerCogIcon
+    icon: ServerCogIcon,
   },
   {
     name: "responsive across all devices",
     description: "Access your PDF documents from any device.",
-    icon: MonitorSmartphoneIcon
-  }
-]
-
+    icon: MonitorSmartphoneIcon,
+  },
+];
 
 export default function Home() {
   return (
@@ -50,49 +57,73 @@ export default function Home() {
       <div className="bg-white py-24 sm:py-32 rounded-md drop-shadow-xl">
         <div className="flex flex-col justify-center items-center mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl sm:text-center">
-            <h2 className="text-base font-semibold leading-7 text-indigo-600">Your Interactive Document companion</h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl">Transform Your PDFs into Interactive conversations</p>
+            <h2 className="text-base font-semibold leading-7 text-indigo-600">
+              Your Interactive Document companion
+            </h2>
+            <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+              Transform Your PDFs into Interactive conversations
+            </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               Introducing{" "}
               <span className="font-bold text-indigo-600">Chat with PDF.</span>
-              <br/>
-              <br/> Upload your documents into {" "}
+              <br />
+              <br /> Upload your documents into{" "}
               <span className="font-bold">dynamic conversations</span>,
               enhancing productivity 10x fold effortlessly.
             </p>
           </div>
-          <Button asChild className="mt-10">
-            <Link href='/dashboard'>Get Started</Link>
+          <Button
+            asChild
+            className="mt-10 border-b rounded-xl bg-indigo-500 text-white hover:bg-white hover:text-indigo-500 transition-colors duration-300"
+          >
+            <Link href="/dashboard">Get Started</Link>
           </Button>
         </div>
-        <div className="relative overflow-hidden pt-16">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <Image 
-            alt="App SS"
-            src="https://i.imgur.com/VciRSTI.jpeg"
-            width={2432}
-            height={1442}
-            className="mb-[-0%] rounded-xl shadow-2xl ring-1 ring-gray-900/10"
+        <div className="flex flex-col overflow-hidden">
+          <ContainerScroll
+            titleComponent={
+              <>
+                <h1 className="text-4xl font-semibold text-black dark:text-white">
+                  Unleash the power of <br />
+                  <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
+                    Chat with PDF
+                  </span>
+                </h1>
+              </>
+            }
+          >
+            <Image
+              src={`/img.webp`}
+              alt="hero"
+              height={720}
+              width={1400}
+              className="mx-auto rounded-2xl object-cover h-full object-left-top"
+              draggable={false}
             />
-            <div aria-hidden="true" className="relative">
-              <div className="absolute bottom-0 -inset-x-32 bg-gradient-to-t from-white/95 pt-[5%]" />
-            </div>
-          </div>
+          </ContainerScroll>
         </div>
+        <LampContainer>
+          <motion.h1
+            initial={{ opacity: 0.5, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.3,
+              duration: 0.8,
+              ease: "easeInOut",
+            }}
+            className="mt-7 mb-0 bg-gradient-to-br from-black to-black py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+          >
+            Use AI <br /> the right way
+          </motion.h1>
+        </LampContainer>
         <div className="mx-auto mt-16 max-w-7xl px-6 sm:mt-20 md:mt-24 lg:px-8">
-          <dl className="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-10 text-base leading-7 text-gray-600 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
-            {features.map(feature => (
-              <div key={feature.name} className="relative pl-9">
-                <dt className="inline font-semibold text-gray-900">
-                  <feature.icon 
-                  aria-hidden="true"
-                  className="absolute left-1 top-1 h-5 w-5 text-indigo-600"
-                  />
-                </dt>
-                <dd>{feature.description}</dd>
-              </div>
-            ))}
-          </dl>
+          <HoverEffect
+            items={features.map((feature) => ({
+              title: feature.name,
+              description: feature.description,
+              icon: feature.icon,
+            }))}
+          />
         </div>
       </div>
     </main>
