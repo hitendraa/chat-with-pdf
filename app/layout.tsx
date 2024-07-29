@@ -17,7 +17,7 @@ export default function RootLayout({
 
     
     <html lang="en">
-      <body className="min-h-screen h-screen overflow-hidden flex  flex-col">{children}</body>
+      <body className="min-h-screen h-screen overflow-hidden flex bg-slate-100  flex-col">{children}</body>
     </html>
     </ClerkProvider>
   );

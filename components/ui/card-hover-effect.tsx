@@ -78,7 +78,7 @@ export const Card = ({
       <div className="relative z-50">
         {Icon && (
           <div className="flex justify-center items-center mb-4">
-            <Icon className="text-4xl text-gray-500 dark:text-gray-400" /> {/* Render the icon */}
+            <Icon className="text-4xl text-black dark:text-black" /> {/* Render the icon */}
           </div>
         )}
         <div className="p-4">{children}</div>
@@ -95,7 +95,7 @@ export const CardTitle = ({
   children: React.ReactNode;
 }) => {
   return (
-    <h4 className={cn("text-black font-bold tracking-wide mt-4", className)}>
+    <h4 className={cn("text-black font-bold tracking-wide mt-4 items-center justify-center flex ", className)}>
       {children}
     </h4>
   );
@@ -111,7 +111,7 @@ export const CardDescription = ({
   return (
     <p
       className={cn(
-        "mt-8 text-zinc-900 tracking-wide leading-relaxed text-sm",
+        "mt-8 text-zinc-900 tracking-wide leading-relaxed text-sm flex items-center justify-center",
         className
       )}
     >
